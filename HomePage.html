@@ -305,7 +305,7 @@
             firebase.auth().onAuthStateChanged(firebaseUser => {
                 if(firebaseUser){
                     console.log(firebaseUser);
-
+                    /*
                     function user(){
                         var userID = firebaseUser.uid;
                         checkIfUserExists(userID);
@@ -319,7 +319,7 @@
                                 email: txtSignUpEmail.val()
                             });
                         }else{
-                            console.log(user already exists in the database);
+                            console.log("user already exists in the database");
                         }
                     }
 
@@ -331,6 +331,7 @@
                             userExistsCallback(userID,exists);
                         });
                     }
+                    */
                 }else{
                     window.location.replace("index.html");
                     console.log('not logged in');

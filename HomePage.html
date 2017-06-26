@@ -11,7 +11,9 @@
 
     <title>Creative - Start Bootstrap Theme</title>
     <!--Angular js -->
+    
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script>
     <!-- Bootstrap Core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -79,7 +81,7 @@
 
                 <!--<h1 id="homeHeading">Your Favorite Source of Free Bootstrap Themes</h1>!-->
                 <div data-ng-app="myApp" data-ng-controller="myCtrl">//fix this
-        
+
                     <p>welcome, {{firstname}}</p>
                     <hr>
                     <p>Start Bootstrap can help you build better websites using the Bootstrap CSS framework! Just download your template and start going, no strings attached!</p>
@@ -279,7 +281,7 @@
     <script>
 
         $(document).ready(function(){
-            var app = angular.module('myApp',[]);
+            var app = angular.module('myApp',['ngRoute']);
 
             app.controller('myCtrl', function($scope){
                 var userId = firebase.auth().currentUser.uid;
@@ -289,38 +291,11 @@
                     console.log(snapshot.val().firstname);
                     return snapshot.val().firstname;
                 });
-            })
+            });
 
             firebase.auth().onAuthStateChanged(firebaseUser => {
                 if(firebaseUser){
                     console.log(firebaseUser);
-                    /* this could be usefull in the future so I'm not gonna delete it
-                    function user(){
-                        var userID = firebaseUser.uid;
-                        checkIfUserExists(userID);
-                    }
-
-                    function userExistsCallback(userID, exists){
-                        if(!exists){
-                            firebase.database().ref('users/' + userID).set({
-                                firstname: txtSignUpFirstName.val(),
-                                lastname: txtSignUpLastName.val(),
-                                email: txtSignUpEmail.val()
-                            });
-                        }else{
-                            console.log("user already exists in the database");
-                        }
-                    }
-
-                    function checkIfUserExists(userID){
-                        var usersRef = new Firebase('users/');
-
-                        usersRef.child(userID).once('value',function(snapchot){
-                            var exists = (snapshot.val() !== null);
-                            userExistsCallback(userID,exists);
-                        });
-                    }
-                    */
                 }else{
                     window.location.replace("index.html");
                     console.log('not logged in');
@@ -333,7 +308,7 @@
         });
     </script>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+
     <!-- Bootstrap Core JavaScript -->
     <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
 

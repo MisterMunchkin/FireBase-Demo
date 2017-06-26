@@ -78,8 +78,8 @@
             <div class="header-content-inner">
 
                 <!--<h1 id="homeHeading">Your Favorite Source of Free Bootstrap Themes</h1>!-->
-                <div data-ng-app="nameApp" ng-controller="getName">//fix this
-
+                <div data-ng-app="myApp" data-ng-controller="myCtrl">//fix this
+        
                     <p>welcome, {{firstname}}</p>
                     <hr>
                     <p>Start Bootstrap can help you build better websites using the Bootstrap CSS framework! Just download your template and start going, no strings attached!</p>
@@ -279,20 +279,9 @@
     <script>
 
         $(document).ready(function(){
-            /*
-            function getName(){
-                var userId = firebase.auth().currentUser.uid;
+            var app = angular.module('myApp',[]);
 
-                return firebase.database().ref('users/' + userId).once('value').then(function(snapshot){
-                    var firstname = snapshot.val().firstname;
-                    var lastname = snapshot.val().lastname;
-
-                    return firstname;
-                });
-            }
-*/
-            var app = angular.module('nameApp',[]);
-            app.controller('getName', function($scope){
+            app.controller('myCtrl', function($scope){
                 var userId = firebase.auth().currentUser.uid;
 
                 console.log(userId);
@@ -305,7 +294,7 @@
             firebase.auth().onAuthStateChanged(firebaseUser => {
                 if(firebaseUser){
                     console.log(firebaseUser);
-                    /*
+                    /* this could be usefull in the future so I'm not gonna delete it
                     function user(){
                         var userID = firebaseUser.uid;
                         checkIfUserExists(userID);

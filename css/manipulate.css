@@ -52,6 +52,7 @@ div.hidden{
     padding-top: 10px;
     padding-bottom: 10px;
 }
+
 #passwordReq{
     color: red;
     font-size: 11px;
@@ -59,3 +60,4 @@ div.hidden{
 #signUpPasswordPadding{
     padding-right: 50px;
 }
+

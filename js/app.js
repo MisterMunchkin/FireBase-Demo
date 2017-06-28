@@ -10,6 +10,7 @@ var config = {
 firebase.initializeApp(config);
 
 
+
 // get elements
 /*
 const preObject = document.getElementById('object');
@@ -28,3 +29,4 @@ ref.once('value')
         console.log('snap.val()', snap.val());
     });
 */
+

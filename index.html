@@ -123,6 +123,7 @@
                     <div class="form-div">
                         <div class="signUp-div">
                             <div class="form-group">
+
                                 <input class="form-control" id="signUpFirstName" placeholder="first name" name="txt_firstname" type="text" autofocus required>
                             </div>
                             <div class="form-group">
@@ -132,6 +133,7 @@
                                 <input class="form-control" id="signUpEmail" placeholder="email address" name="txt_useremail" type="email" required>
                             </div>
                             <div class="form-group" id="signUpPasswordPadding">
+
                                 <input class="form-control" id="signUpPassword" placeholder="password" name="txt_userpassword" type="password" required>
                             </div>
                             <div class="form-group">
@@ -155,7 +157,9 @@
                             </div>
                             <div class="divErrorSignUp" id="divPasswordLength" style="display:none;">
                                 <p id="PasswordLength" aria-atomic="true" role="alert">
+
                                     Please make sure password is more than 8 characters.
+
                                 </p>
                             </div>
                             <div class="form-group">
@@ -351,6 +355,7 @@
     </section>
 
 
+
     <pre id="object"></pre>
 
 
@@ -359,12 +364,15 @@
     <!-- FIRE BASE -->
     <script src="https://www.gstatic.com/firebasejs/3.7.5/firebase.js"></script>
 
+
     <script src="js/app.js"></script>
 
     <script>
         $(document).ready(function(){
             //Get elements
+
             var database = firebase.database();
+
 
             var txtLoginEmail = $('#LoginEmail');
             var txtLoginPassword = $('#LoginPassword');
@@ -409,7 +417,9 @@
                 }
             });
 
+
             //$("#signUpPassword").after('<p id="passwordReq">password must have a minimum of 8 characters, atleast one letter and one number.</p>')
+
 
 
             //toggle between login and signup
@@ -454,6 +464,7 @@
             });
 
             //validate length of password
+
             function validatePassword($password){
                 var passwordReg = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
 
@@ -461,6 +472,7 @@
             }
             $("#signUpPassword").keyup(function(){
                 if(!validatePassword($("#signUpPassword").val())){
+
                     $("#signUpPassword").css('border-color', 'red');
                     $("#signUpPassword").css('border-width', '2px');
                 }else{
@@ -483,12 +495,14 @@
             var txtSignUpEmail = $("#signUpEmail");
             var txtSignUpPassword = $("#signUpPassword");
             var txtSignUpConfPassword = $("#signUpConfPassword");
+
             var txtSignUpFirstName = $("#signUpFirstName");
             var txtSignUpLastName = $("#signUpLastName");
             //NOTE: "password does not match" error does not show. instead it
             //shows "password needs to be atleast 6 characters"
 
             var firstTimeUserCheck = 0;
+
             $("#btnSignup").click(function(){
                 if(txtSignUpEmail.val() && txtSignUpPassword.val() && txtSignUpConfPassword.val()){
                     if(txtSignUpPassword.val().length < 6){
@@ -512,6 +526,7 @@
                                 console.log('user object:' + user);
                                 //window.location.replace("HomePage.html");
 
+
                                 user.sendEmailVerification().then(function(){
                                     console.log('email verification sent!');
                                 }, function(error){
@@ -527,8 +542,10 @@
                                 var errorMessage = error.message;
                                 console.log(errorCode + '-' + errorMessage);
 
+
                                 //set a notif message error stating that email already in use
                             });
+
 
                         }
                     }
@@ -543,6 +560,7 @@
             firebase.auth().onAuthStateChanged(firebaseUser => {
                 if(firebaseUser){
                     console.log(firebaseUser);
+
 
                     firebaseUser.updateProfile({
                         displayName: txtSignUpFirstName.val() + txtSignUpLastName.val()
@@ -564,10 +582,13 @@
                     window.location.replace("HomePage.html");
                 }else{
                     console.log('not logged in');
+
                 }
             });
         });
     </script>
+
+
     <!-- jQuery -->
 
 

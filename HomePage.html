@@ -284,26 +284,31 @@
     <script src="js/app.js"></script>
 
     <script>
-        var app = angular.module('myApp',[]);
-
-        app.controller('myCtrl', function($scope){
-            var userId = firebase.auth().currentUser.uid;
-
-            console.log(userId);
-            $scope.firstname = firebase.database().ref('users/' + userId).once('value').then(function(snapshot){
-                console.log(snapshot.val().firstname);
-                return snapshot.val().firstname;
-            });
-        });
+        var userUID;
 
         firebase.auth().onAuthStateChanged(firebaseUser => {
             if(firebaseUser){
                 console.log(firebaseUser);
+
+                userUID = firebaseUser.uid;
             }else{
                 window.location.replace("index.html");
                 console.log('not logged in');
             }
         });
+
+        var app = angular.module('myApp',[]);
+
+        app.controller('myCtrl', function($scope){
+            //var userId = firebase.auth().currentUser.uid;
+
+            console.log(userUID);
+            $scope.firstname = firebase.database().ref('users/' + userUID).once('value').then(function(snapshot){
+                console.log(snapshot.val().firstname);
+                return snapshot.val().firstname;
+            });
+        });
+
         $("#btnLogout").click(function(){
             firebase.auth().signOut();
             window.location.replace("index.html");

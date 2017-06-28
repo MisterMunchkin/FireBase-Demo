@@ -291,6 +291,8 @@
                 console.log(firebaseUser);
 
                 userUID = firebaseUser.uid;
+                //console.log(userUID);
+
             }else{
                 window.location.replace("index.html");
                 console.log('not logged in');
@@ -298,13 +300,14 @@
         });
 
         var app = angular.module('myApp',[]);
-
+        
         app.controller('myCtrl', function($scope){
             //var userId = firebase.auth().currentUser.uid;
 
-            console.log(userUID);
+            //console.log(userUID);
             $scope.firstname = firebase.database().ref('users/' + userUID).once('value').then(function(snapshot){
                 console.log(snapshot.val().firstname);
+                console.log(snapshot.val().email);
                 return snapshot.val().firstname;
             });
         });

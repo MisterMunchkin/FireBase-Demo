@@ -8,3 +8,25 @@ var config = {
   };
 
 firebase.initializeApp(config);
+
+
+
+// get elements
+/*
+const preObject = document.getElementById('object');
+
+//ref function gets you to the root of the database
+// child creates a new branch
+const dbRefObject = firebase.database().ref().child('object');
+//sync object changes
+dbRefObject.on('value', snap => console.log(snap.val()));
+
+*/
+/*
+var ref = firebase.app().database().ref();
+ref.once('value')
+    .then(function(snap){
+        console.log('snap.val()', snap.val());
+    });
+*/
+

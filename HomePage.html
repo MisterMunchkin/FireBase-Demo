@@ -11,6 +11,11 @@
 
     <title>Creative - Start Bootstrap Theme</title>
 
+    <!--Angular js -->
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script>
+
     <!-- Bootstrap Core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -76,10 +81,16 @@
         <div class="header-content">
             <div class="header-content-inner">
 
-                <h1 id="homeHeading">Your Favorite Source of Free Bootstrap Themes</h1>
-                <hr>
-                <p>Start Bootstrap can help you build better websites using the Bootstrap CSS framework! Just download your template and start going, no strings attached!</p>
-                <a href="#about" class="btn btn-primary btn-xl page-scroll">Find Out More</a>
+
+                <!--<h1 id="homeHeading">Your Favorite Source of Free Bootstrap Themes</h1>!-->
+                <div data-ng-app="myApp" data-ng-controller="myCtrl">//fix this
+
+                    <p>welcome, {{firstname}}</p>
+                    <hr>
+                    <p>Start Bootstrap can help you build better websites using the Bootstrap CSS framework! Just download your template and start going, no strings attached!</p>
+                    <a href="#about" class="btn btn-primary btn-xl page-scroll">Find Out More</a>
+                </div>
+
             </div>
         </div>
     </header>
@@ -272,17 +283,33 @@
 
     <script src="js/app.js"></script>
     <script>
-        firebase.auth().onAuthStateChanged(firebaseUser => {
-            if(firebaseUser){
-                console.log(firebaseUser);
-            }else{
-                console.log('not logged in');
+
+
+        $(document).ready(function(){
+            var app = angular.module('myApp',['ngRoute']);
+
+            app.controller('myCtrl', function($scope){
+                var userId = firebase.auth().currentUser.uid;
+
+                console.log(userId);
+                $scope.firstname = firebase.database().ref('users/' + userId).once('value').then(function(snapshot){
+                    console.log(snapshot.val().firstname);
+                    return snapshot.val().firstname;
+                });
+            });
+
+            firebase.auth().onAuthStateChanged(firebaseUser => {
+                if(firebaseUser){
+                    console.log(firebaseUser);
+                }else{
+                    window.location.replace("index.html");
+                    console.log('not logged in');
+                }
+            });
+            $("#btnLogout").click(function(){
+                firebase.auth().signOut();
                 window.location.replace("index.html");
-            }
-        });
-        $("#btnLogout").click(function(){
-            firebase.auth().signOut();
-            window.location.replace("index.html");
+            });
         });
     </script>
 
